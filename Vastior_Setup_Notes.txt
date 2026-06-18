@@ -1,0 +1,45 @@
+Vastior - Setup Notes
+=====================
+
+Vastior is a camera-zoom tool for Grim Dawn (unofficial community tool).
+It only changes the in-game camera. It never reads, writes, or edits your
+characters, shared stash, saves, or Steam Cloud data.
+
+QUICK START
+  1. Keep Vastior.exe and the files\ folder together.
+  2. Double-click Vastior.exe.
+  3. Confirm the Game folder (or Browse to it).
+  4. Click Install / Repair and confirm. Vastior backs up your saves first, then
+     installs the camera files.
+  5. Launch Grim Dawn normally and zoom with the mouse wheel.
+
+TWEAKING
+  Edit Vastior.ini in your Grim Dawn folder, save, then fully close and relaunch
+  the game. Values are range-checked and clamped to safe limits.
+
+UNINSTALL
+  Open Vastior.exe and click Uninstall. It removes only the files it installed
+  and restores the game to stock. Your save backups are left untouched.
+
+HOW INSTALL / UNINSTALL WORKS
+  Everything runs inside Vastior.exe - there are no scripts and no PowerShell.
+  Install writes a small Vastior_install.txt manifest; uninstall uses it to
+  remove exactly what was installed and restore anything it replaced.
+
+BACKUPS / RESTORE
+  Before installing, Vastior copies your saves to:
+    Desktop\Grim Dawn Backups\GD_Save_Backup_<date>\
+  These are never deleted by Vastior. If you restore Steam Cloud saves, disable
+  Steam Cloud for Grim Dawn first so Steam does not overwrite them on sync.
+
+SMARTSCREEN / ANTIVIRUS
+  The release files are unsigned, so Windows SmartScreen may warn on first run
+  (More info -> Run anyway), and some antivirus may flag the camera files as a
+  false positive. Allow them if you trust this build, or uninstall to remove all.
+
+PERMISSIONS
+  Detecting status never needs admin. If your Grim Dawn folder is under
+  "Program Files" and is not writable, run Vastior.exe as administrator for the
+  install/uninstall only.
+
+See README.md for full details and troubleshooting.

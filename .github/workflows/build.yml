@@ -1,0 +1,45 @@
+# Vastior CI - confirms the manager compiles cleanly and the native source
+# passes static analysis. The native DLLs are built locally with the pinned
+# w64devkit toolchain (see CONTRIBUTING.md); CI does not rebuild them because
+# matching that exact msvcrt-linked toolchain in a hosted runner is not reliable.
+name: build-and-verify
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  manager:
+    name: manager build (C#)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Vastior.exe (warnings = errors)
+        shell: pwsh
+        run: |
+          $csc = "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+          & $csc /nologo /warn:4 /warnaserror /target:winexe /platform:anycpu `
+            /win32icon:assets\Vastior.ico /out:Vastior.exe `
+            /r:System.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll `
+            (Get-ChildItem src\*.cs)
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          "Built Vastior.exe  -  FileVersion " + (Get-Item Vastior.exe).VersionInfo.FileVersion
+
+  native-analysis:
+    name: native static analysis (cppcheck)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: mingw-w64-ucrt-x86_64-cppcheck
+      - name: cppcheck (fail on warnings)
+        shell: msys2 {0}
+        run: |
+          cppcheck --enable=warning,portability,performance \
+            --inline-suppr --error-exitcode=1 \
+            -I src src/VastiorCamera.cpp src/VastiorProxy.cpp

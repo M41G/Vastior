@@ -1,0 +1,61 @@
+# ---- build outputs ----
+bin/
+obj/
+build/
+out/
+*.obj
+*.o
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.def.lib
+
+# ---- IDE / editor ----
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userprefs
+*~
+
+# ---- logs / backups / local state ----
+# (these are created by the installer in the GAME folder, never in the repo;
+#  Vastior_Setup_Notes.txt is a shipped doc and IS committed, so it is not listed)
+*.log
+logs/
+backups/
+*_Backup_*/
+*_backup_*/
+_Vastior_backup_*/
+Vastior_install.log
+Vastior_install.txt
+local.config
+appsettings.Local.json
+
+# ---- archives / downloaded / extracted third-party ----
+*.zip
+*.7z
+*.rar
+release-temp/
+downloaded/
+extracted/
+w64devkit*/
+winmm_orig.dll
+
+# ---- runtime files that must never be committed ----
+files/winmm_orig.dll
+files/x64/winmm_orig.dll
+
+# ---- prebuilt binaries are RELEASE-ONLY, never committed ----
+# Build them from src/ (see CONTRIBUTING.md) or download the signed release zip.
+# Keeping the repo source-only means no opaque/unsigned binaries live in history,
+# and the only distributed binaries are the signed, checksummed release assets.
+Vastior.exe
+files/Vastior.dll
+files/winmm.dll
+files/x64/Vastior.dll
+files/x64/winmm.dll
+# (files/Vastior.ini is a text config and IS committed. winmm_orig.dll is
+#  generated from the user's own system winmm at install time, never shipped.)

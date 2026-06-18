@@ -1,0 +1,18 @@
+Vastior - NOTICE
+================
+
+Vastior is an unofficial community tool for Grim Dawn. It is NOT affiliated with,
+endorsed by, or sponsored by Crate Entertainment, Grim Dawn, or Valve / Steam.
+
+Vastior is released under the MIT License (see LICENSE). It is an independent
+implementation: it adjusts Grim Dawn's own in-game camera and bundles no
+third-party code, binaries, or assets.
+
+Vastior includes its own winmm.dll proxy loader. During install, Vastior creates
+winmm_orig.dll from the copy of winmm already present on the user's PC, so no
+Microsoft Windows system DLL is redistributed.
+
+Trademarks
+----------
+"Grim Dawn" and related names are property of Crate Entertainment. "Steam" is a
+trademark of Valve Corporation. Used here for identification only.
